@@ -168,7 +168,7 @@ CREATE TABLE SRoutes(
 drop table bibus_state cascade constraints;
 CREATE TABLE bibus_state(
     bibus_plate CHAR(8) NOT NULL,
-    date CHAR(22) NOT NULL,
+    state_date CHAR(22) NOT NULL,
     state CHAR(20) NUT NULL,
     --assigned_route
     CONSTRAINT PK_BIBUS_STATE PRIMARY KEY(bibus_plate, date),
@@ -179,7 +179,7 @@ CREATE TABLE bibus_state(
 drop table bibusero_state cascade constraints;
 CREATE TABLE bibusero_state(
     bibusero_passport CHAR(20) NOT NULL,
-    date CHAR(22) NOT NULL,
+    state_date CHAR(22) NOT NULL,
     state CHAR(20),
     --assigned_route
     CONSTRAINT PK_BIBUSERO_STATE PRIMARY KEY(bibusero_passport,date),
