@@ -140,7 +140,7 @@ CREATE TABLE routes(
     route_id CHAR (5) NOT NULL,
     route_stop_time CHAR(10) NOT NULL,
     route_municipality CHAR(50) NOT NULL,
-    CONSTRAINT PK_ROUTES PRIMARY KEY(route_id),
+    CONSTRAINT PK_ROUTES PRIMARY KEY(route_id,route_stop_time),
     CONSTRAINT FK_REFERENCES_ROUTES_MUNICIPALITY FOREIGN KEY(route_municipality) REFERENCES MUNICIPALITY(municipality_name)
 );
 
