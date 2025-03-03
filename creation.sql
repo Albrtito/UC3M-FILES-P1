@@ -46,8 +46,10 @@ drop table book_entries cascade constraints;
 CREATE TABLE book_entries(
     entry_signature CHAR(20) NOT NULL,
     entry_edition CHAR(20) NOT NULL,
+    -- Could have a default value = "new"
     entry_condition CHAR(30) NOT NULL,
     entry_comments CHAR(500),
+    -- Could have a default value = "free"
     entry_state CHAR(30) NOT NULL,
     entry_deregistraton_time CHAR(10),
     CONSTRAINT PK_BOOK_ENTRIES PRIMARY KEY(entry_signature),
@@ -57,3 +59,14 @@ CREATE TABLE book_entries(
 );
 
 
+drop table book_loans cascade constraints;
+
+CREATE TABLE book_loans(
+    loan_initial_date CHAR(22) NOT NULL,
+    loan_entry CHAR(20) NOT NULL,
+    loan_user CHAR(10) NOT NULL,
+    loan_final_date CHARR(22),
+    CONSTRAINT PK_BOOK_LOANS PRIMARY KEY(loan_initial_date,loan_entry,loan_user),
+    CONSTRAINT FK_REFERENCE_ENTRY FOREIGN KEY(loan_entry) REFERENCES BOOK_ENTRIES(entry_signature),
+    --CONSTRAINT FK_REFERENCE_USER FOREIGN KEY(loan_user) REFERENCES USER(user_id)
+);
