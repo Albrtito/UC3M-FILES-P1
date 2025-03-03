@@ -46,9 +46,9 @@ drop table book_entries cascasde constraints;
 CREATE TABLE book_entries(
     entry_signature CHAR(20) NOT NULL,
     entry_edition CHAR(20) NOT NULL,
-    entry_condition CHAR(20) NOT NULL DEFAULT 'new',
+    entry_condition CHAR(20) NOT NULL,
     entry_comments CHAR(500),
-    entry_state CHAR(20) NOT NULL DEFAULT 'free',
+    entry_state CHAR(20) NOT NULL,
     entry_deregistraton_time CHAR(10),
     CONSTRAINT PK_BOOK_ENTRIES PRIMARY KEY(entry_signature),
     CONSTRAINT FK_REFERENCEEDITION FOREIGN KEY(entry_edition) REFERENCES BOOK_EDITIONS(edition_national_identifier),
