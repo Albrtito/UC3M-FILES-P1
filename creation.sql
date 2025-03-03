@@ -72,7 +72,7 @@ CREATE TABLE users(
     user_name CHAR(80) NOT NULL,
     user_surname_1 CHAR (80) NOT NULL,
     user_surname_2 CHAR (80) NOT NULL,
-    user_birthdate CHAR(10) NOT NUL
+    user_birthdate CHAR(10) NOT NULL,
     user_municipality CHAR(50) NOT NULL,
     user_address CHAR(150) NOT NULL,
     user_email CHAR(100),
