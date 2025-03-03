@@ -132,6 +132,6 @@ CREATE TABLE bibusero(
     bibusero_email CHAR(100) NOT NULL,
     bibusero_contract_start_date CHAR(10) NOT NULL,
     bibusero_contract_end_date CHAR(10),
-    CONSTRAINT PK_BIBUSERO PRIMARY KEY(ibusero_passport)
+    CONSTRAINT PK_BIBUSERO PRIMARY KEY(bibusero_passport)
 );
 
