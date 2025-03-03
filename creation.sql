@@ -52,8 +52,8 @@ CREATE TABLE book_entries(
     entry_deregistraton_time CHAR(10),
     CONSTRAINT PK_BOOK_ENTRIES PRIMARY KEY(entry_signature),
     CONSTRAINT FK_REFERENCEEDITION FOREIGN KEY(entry_edition) REFERENCES BOOK_EDITIONS(edition_national_identifier),
-    CONSTRAINT C_CONDITION CHECK(entry_condition IN ("new","good","worn","very-used","deteriorated")),
-    CONSTRAINT C_STATE CHECK(entry_state IN ("loaned","free","deregistered"))
+    CONSTRAINT C_CONDITION CHECK(entry_condition IN ('new','good','worn','very-used','deteriorated')),
+    CONSTRAINT C_STATE CHECK(entry_state IN ('loaned','free','deregistered'))
 );
 
 
