@@ -59,6 +59,24 @@ CREATE TABLE book_entries(
 );
 
 
+drop table users cascade constraints;
+CREATE TABLE users(
+    user_id CHAR(10) NOT NULL,
+    user_name CHAR(80) NOT NULL,
+    user_surname_1 CHAR (80) NOT NULL,
+    user_surname_2 CHAR (80) NOT NULL,
+    user_birthdate CHAR(10) NOT NULL,
+    user_municipality CHAR(50) NOT NULL,
+    user_address CHAR(150) NOT NULL,
+    user_email CHAR(100),
+    user_phone_number CHAR(9) NOT NULL,
+    user_sanction CHAR(20),
+    user_passport CHAR(20) NOT NULL,
+    CONSTRAINT PK_USER PRIMARY KEY(user_id)
+    --CONSTRAINT FK_REFERENCE_MUNICIPALITY FOREGN KEY(user_municipality) REFERENCES MUNICIPALITY(municipality_name)
+
+
+
 drop table book_loans cascade constraints;
 
 CREATE TABLE book_loans(
@@ -67,6 +85,6 @@ CREATE TABLE book_loans(
     loan_user CHAR(10) NOT NULL,
     loan_final_date CHAR(22),
     CONSTRAINT PK_BOOK_LOANS PRIMARY KEY(loan_initial_date,loan_entry,loan_user),
-    CONSTRAINT FK_REFERENCE_ENTRY FOREIGN KEY(loan_entry) REFERENCES BOOK_ENTRIES(entry_signature)
-    --CONSTRAINT FK_REFERENCE_USER FOREIGN KEY(loan_user) REFERENCES USER(user_id)
+    CONSTRAINT FK_REFERENCE_ENTRY FOREIGN KEY(loan_entry) REFERENCES BOOK_ENTRIES(entry_signature),
+    CONSTRAINT FK_REFERENCE_USER FOREIGN KEY(loan_user) REFERENCES USER(user_id)
 );
