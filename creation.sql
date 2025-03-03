@@ -58,7 +58,18 @@ CREATE TABLE book_entries(
     CONSTRAINT C_STATE CHECK(entry_state IN ('loaned','free','deregistered'))
 );
 
+drop table municipality cascade constraints;
+CREATE TABLE municipality(
+    municipality_name CHAR(50) NOT NULL,
+    municipality_popuation CHAR(8) NOT NULL,
+    municipality_has_library CHAR(1) NOT NULL,
+    municipality_address CHAR(100) NOT NULL,
+    municipality_province CHAR(22) NOT NULL,
+    CONSTRAINT PK_MUNICIPALITY PRIMARY KEY(municipality_name)
+);
+    
 
+        
 drop table users cascade constraints;
 CREATE TABLE users(
     user_id CHAR(10) NOT NULL,
@@ -72,8 +83,8 @@ CREATE TABLE users(
     user_phone_number CHAR(9) NOT NULL,
     user_sanction CHAR(20),
     user_passport CHAR(20) NOT NULL,
-    CONSTRAINT PK_USER PRIMARY KEY(user_id)
-    --CONSTRAINT FK_REFERENCE_MUNICIPALITY FOREGN KEY(user_municipality) REFERENCES MUNICIPALITY(municipality_name)
+    CONSTRAINT PK_USER PRIMARY KEY(user_id),
+    CONSTRAINT FK_REFERENCE_MUNICIPALITY FOREGN KEY(user_municipality) REFERENCES MUNICIPALITY(municipality_name)
 );
 
 
