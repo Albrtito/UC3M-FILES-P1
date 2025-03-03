@@ -72,7 +72,7 @@ CREATE TABLE users(
     user_name CHAR(80) NOT NULL,
     user_surname_1 CHAR (80) NOT NULL,
     user_surname_2 CHAR (80) NOT NULL,
-    user_birthdate CHAR(10) NOT NULL,
+    user_birthdate CHAR(10) NOT NUL
     user_municipality CHAR(50) NOT NULL,
     user_address CHAR(150) NOT NULL,
     user_email CHAR(100),
@@ -107,4 +107,18 @@ CREATE TABLE m_library(
     library_telephone CHAR(9) NOT NULL,
     CONSTRAINT PK_M_LIBRARY PRIMARY KEY(library_CIF),
     CONSTRAINT FK_REFERENCE_LIBRARY_MUNICIPALITY FOREIGN KEY(library_municipality) REFERENCES MUNICIPALITY(municipality_name)
+);
+
+drop table user_comments cascade constraints;
+CREATE TABLE user_comments(
+    comment_id CHAR(20) NOT NULL,
+    comment_text CHAR(2000) NOT NULL,
+    comment_user CHAR(10) NOT NULL,
+    comment_entry CHAR(20) NOT NULL,
+    comment_date CHAR(22) NOT NULL,
+    comment_likes CHAR(7) NOT NULL,
+    comment_dislikes CHAR(7) NOT NULL,
+    CONSTRAINT PK_USER_COMMENTS PRIMARY KEY(comment_id),
+    CONSTRAINT FK_REFRENCE_COMMENT_USER FOREIGN KEY(comment_user) REFERENCES USERS(user_id),
+    CONSTRAINT FK_REFERENCE_COMMENT_ENTRY KEY(comment_entry) REFERENCES BOOK_ENTRIES(entry_signature)
 );
