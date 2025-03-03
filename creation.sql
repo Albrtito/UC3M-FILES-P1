@@ -86,5 +86,5 @@ CREATE TABLE book_loans(
     loan_final_date CHAR(22),
     CONSTRAINT PK_BOOK_LOANS PRIMARY KEY(loan_initial_date,loan_entry,loan_user),
     CONSTRAINT FK_REFERENCE_ENTRY FOREIGN KEY(loan_entry) REFERENCES BOOK_ENTRIES(entry_signature),
-    CONSTRAINT FK_REFERENCE_USER FOREIGN KEY(loan_user) REFERENCES USER(user_id)
+    CONSTRAINT FK_REFERENCE_USER FOREIGN KEY(loan_user) REFERENCES USERS(user_id)
 );
