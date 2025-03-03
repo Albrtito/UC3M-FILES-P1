@@ -152,6 +152,7 @@ CREATE TABLE bibus(
     CONSTRAINT PK_BIBUS PRIMARY KEY(bibus_plate)
 );
 
+-- SCHEDULED ROUTES -> SROUTES
 drop table SRoutes cascade constraints;
 CREATE TABLE SRoutes(
     SRoute_date CHAR(22) NOT NULL,
@@ -169,8 +170,8 @@ drop table bibus_state cascade constraints;
 CREATE TABLE bibus_state(
     bibus_plate CHAR(8) NOT NULL,
     state_date CHAR(22) NOT NULL,
-    state CHAR(20) NOT NULL,
-    --assigned_route
+    state CHAR(20) NOT NULL DEFAULT 'aviable',
+    assigned_route_id CHAR(5) NOT NULL,
     CONSTRAINT PK_BIBUS_STATE PRIMARY KEY(bibus_plate, state_date),
     CONSTRAINT FK_REFERENCES_STATE_BIBUS FOREIGN KEY(bibus_plate) REFERENCES BIBUS(bibus_plate),
     CONSTRAINT C_BIBUS_STATE CHECK(state IN ('assigned','inspection','aviable'))
@@ -180,11 +181,12 @@ drop table bibusero_state cascade constraints;
 CREATE TABLE bibusero_state(
     bibusero_passport CHAR(20) NOT NULL,
     state_date CHAR(22) NOT NULL,
-    state CHAR(20),
-    --assigned_route
+    state CHAR(20) DEFAULT 'aviable',
+    assigned_route_id CHAR(5) NOT NULL,
     CONSTRAINT PK_BIBUSERO_STATE PRIMARY KEY(bibusero_passport, state_date),
     CONSTRAINT FK_REFERENCES_STATE_BIBUSERO FOREIGN KEY(bibusero_passport) REFERENCES BIBUSERO(bibusero_passport),
-    CONSTRAINT C_BIBUSERO_STATE CHECK(state IN ('assigned','inspection','aviable'))
+    CONSTRAINT FK_REFERENCES_BIBUSERO_STATE_ROUTE FOREIGN KEY(assigned_route_id) REFERENCES ROUTES(route_id),
+    CONSTRAINT C_BIBUSERO_STATE CHECK(state IN ('assigned','aviable'))
 );
     
 
