@@ -21,7 +21,7 @@ drop table book_editions cascade constraints;
 
 CREATE TABLE book_editions(
     edition_national_identifier CHAR(20) NOT NULL,
-    editoon_ISBN CHAR(20) NOT NULL,
+    edition_ISBN CHAR(20) NOT NULL,
     edition_main_language CHAR(50) NOT NULL,
     edition_other_language CHAR(50),
     edition_number CHAR(50) NOT NULL,
@@ -37,6 +37,6 @@ CREATE TABLE book_editions(
     edition_book_title CHAR(200) NOT NULL,
     edition_book_main_author CHAR(100) NOT NULL,
     CONSTRAINT PK_BOOK_EDITIONS PRIMARY KEY (edition_national_identifier),
-    CONSTRAINT FK_REFERENCEBOOK FOREIGN KEY(edition_book_title, editoin_book_main_author) REFERENCES BOOKS(book_title,book_main_author)
+    CONSTRAINT FK_REFERENCEBOOK FOREIGN KEY(edition_book_title, edition_book_main_author) REFERENCES BOOKS(book_title,book_main_author)
 );
 
