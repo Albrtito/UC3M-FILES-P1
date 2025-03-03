@@ -171,7 +171,7 @@ CREATE TABLE bibus_state(
     state_date CHAR(22) NOT NULL,
     state CHAR(20) NUT NULL,
     --assigned_route
-    CONSTRAINT PK_BIBUS_STATE PRIMARY KEY(bibus_plate, date),
+    CONSTRAINT PK_BIBUS_STATE PRIMARY KEY(bibus_plate, state_date),
     CONSTRAINT FK_REFERENCES_STATE_BIBUS FOREIGN KEY(bibus_plate) REFERENCES BIBUS(bibus_plate),
     CONSTRAINT C_BIBUS_STATE CHECK(state IN ('assigned','inspection','aviable'))
 );
@@ -182,7 +182,7 @@ CREATE TABLE bibusero_state(
     state_date CHAR(22) NOT NULL,
     state CHAR(20),
     --assigned_route
-    CONSTRAINT PK_BIBUSERO_STATE PRIMARY KEY(bibusero_passport,date),
+    CONSTRAINT PK_BIBUSERO_STATE PRIMARY KEY(bibusero_passport, state_date),
     CONSTRAINT FK_REFERENCES_STATE_BIBUSERO FOREIGN KEY(bibusero_passport) REFERENCES BIBUSERO(bibusero_passport),
     CONSTRAINT C_BIBUSERO_STATE CHECK(state IN ('assigned','inspection','aviable'))
 );
