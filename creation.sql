@@ -80,7 +80,7 @@ CREATE TABLE users(
     user_sanction CHAR(20),
     user_passport CHAR(20) NOT NULL,
     CONSTRAINT PK_USER PRIMARY KEY(user_id),
-    CONSTRAINT FK_REFERENCE_MUNICIPALITY FOREIGN KEY(user_municipality) REFERENCES MUNICIPALITY(municipality_name)
+    CONSTRAINT FK_REFERENCE_USERS_MUNICIPALITY FOREIGN KEY(user_municipality) REFERENCES MUNICIPALITY(municipality_name)
 );
 
 
@@ -106,5 +106,5 @@ CREATE TABLE m_library(
     library_email CHAR(20) NOT NULL,
     library_telephone CHAR(9) NOT NULL,
     CONSTRAINT PK_M_LIBRARY PRIMARY KEY(library_CIF),
-    CONSTRAINT FK_REFERENCE_MUNICIPALITY FOREIGN KEY(library_municipality) REFERENCES MUNICIPALITY(municipality_name)
+    CONSTRAINT FK_REFERENCE_LIBRARY_MUNICIPALITY FOREIGN KEY(library_municipality) REFERENCES MUNICIPALITY(municipality_name)
 );
