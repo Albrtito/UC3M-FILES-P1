@@ -165,3 +165,26 @@ CREATE TABLE SRoutes(
     CONSTRAINT FK_REFERNCES_SROUTS_BIBUSERO FOREIGN KEY(SRoute_bibusero) REFERENCES BIBUSERO(bibusero_passport)
 );
 
+drop table bibus_state cascade constraints;
+CREATE TABLE bibus_state(
+    bibus_plate CHAR(8) NOT NULL,
+    date CHAR(22) NOT NULL,
+    state CHAR(20) NUT NULL,
+    --assigned_route
+    CONSTRAINT PK_BIBUS_STATE PRIMARY KEY(bibus_plate, date),
+    CONSTRAINT FK_REFERENCES_STATE_BIBUS FOREIGN KEY(bibus_plate) REFERENCES BIBUS(bibus_plate),
+    CONSTRAINT C_BIBUS_STATE CHECK(state IN ('assigned','inspection','aviable'))
+);
+
+drop table bibusero_state cascade constraints;
+CREATE TABLE bibusero_state(
+    bibusero_passport CHAR(20) NOT NULL,
+    date CHAR(22) NOT NULL,
+    state CHAR(20),
+    --assigned_route
+    CONSTRAINT PK_BIBUSERO_STATE PRIMARY KEY(bibusero_passport,date),
+    CONSTRAINT FK_REFERENCES_STATE_BIBUSERO FOREIGN KEY(bibusero_passport) REFERENCES BIBUSERO(bibusero_passport),
+    CONSTRAINT C_BIBUSERO_STATE CHECK(state IN ('assigned','inspection','aviable'))
+);
+    
+
