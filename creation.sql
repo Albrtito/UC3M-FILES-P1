@@ -41,7 +41,7 @@ CREATE TABLE book_editions(
 );
 
 
-drop table book_entries cascasde constraints;
+drop table book_entries cascade constraints;
 
 CREATE TABLE book_entries(
     entry_signature CHAR(20) NOT NULL,
