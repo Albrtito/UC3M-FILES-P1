@@ -1,6 +1,4 @@
 drop table books cascade constraints;
-
-
 CREATE TABLE books(
     book_title CHAR(200) NOT NULL,
     book_main_author CHAR(100) NOT NULL,
@@ -18,7 +16,6 @@ CREATE TABLE books(
 
 
 drop table book_editions cascade constraints;
-
 CREATE TABLE book_editions(
     edition_national_identifier CHAR(20) NOT NULL,
     edition_ISBN CHAR(20) NOT NULL,
@@ -42,7 +39,6 @@ CREATE TABLE book_editions(
 
 
 drop table book_entries cascade constraints;
-
 CREATE TABLE book_entries(
     entry_signature CHAR(20) NOT NULL,
     entry_edition CHAR(20) NOT NULL,
@@ -89,7 +85,6 @@ CREATE TABLE users(
 
 
 drop table book_loans cascade constraints;
-
 CREATE TABLE book_loans(
     loan_initial_date CHAR(22) NOT NULL,
     loan_entry CHAR(20) NOT NULL,
@@ -98,4 +93,18 @@ CREATE TABLE book_loans(
     CONSTRAINT PK_BOOK_LOANS PRIMARY KEY(loan_initial_date,loan_entry,loan_user),
     CONSTRAINT FK_REFERENCE_ENTRY FOREIGN KEY(loan_entry) REFERENCES BOOK_ENTRIES(entry_signature),
     CONSTRAINT FK_REFERENCE_USER FOREIGN KEY(loan_user) REFERENCES USERS(user_id)
+);
+
+
+drop  table m_library cascade constraints;
+CREATE TABLE m_library(
+    library_CIF CHAR(20) NOT NULL,
+    library_name CHAR(20) NOT NULL,
+    library_foundation_date CHAR(20) NOT NULL,
+    library_municipality CHAR(50) NOT NULL,
+    library_address CHAR(100) NOT NULL,
+    library_email CHAR(20) NOT NULL,
+    library_telephone CHAR(9) NOT NULL,
+    CONSTRAINT PK_M_LIBRARY PRIMARY KEY(library_CIF),
+    CONSTRAINT FK_REFERENCE_MUNICIPALITY FOREIGN KEY(library_municipality) REFERENCES MUNICIPALITY(municipality_name)
 );
