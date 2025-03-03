@@ -162,6 +162,6 @@ CREATE TABLE SRoutes(
     CONSTRAINT PK_SROUTES PRIMARY KEY(SRoute_date,SRoute_route_id, SRoute_route_stop_time, SRoute_bibus, SRoute_bibusero),
     CONSTRAINT FK_REFERENCES_SROUTES_ROUTE FOREIGN KEY(SRoute_route_id, SRoute_route_stop_time) REFERENCES ROUTES(route_id, route_stop_time),
     CONSTRAINT FK_REFERENCES_SROUTES_BIBUS FOREIGN KEY(SRoute_bibus) REFERENCES BIBUS(bibus_plate),
-    CONSTRAINT FK_REFERNCES_SROUTS_BIBUSERO FOREIGN KEY(SRoute_bibusro) REFERENCES BIBUSERO(bibusero_passport)
+    CONSTRAINT FK_REFERNCES_SROUTS_BIBUSERO FOREIGN KEY(SRoute_bibusero) REFERENCES BIBUSERO(bibusero_passport)
 );
 
