@@ -84,7 +84,7 @@ CREATE TABLE users(
     user_sanction CHAR(20),
     user_passport CHAR(20) NOT NULL,
     CONSTRAINT PK_USER PRIMARY KEY(user_id),
-    CONSTRAINT FK_REFERENCE_MUNICIPALITY FOREGN KEY(user_municipality) REFERENCES MUNICIPALITY(municipality_name)
+    --CONSTRAINT FK_REFERENCE_MUNICIPALITY FOREGN KEY(user_municipality) REFERENCES MUNICIPALITY(municipality_name)
 );
 
 
