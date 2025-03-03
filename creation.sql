@@ -135,3 +135,12 @@ CREATE TABLE bibusero(
     CONSTRAINT PK_BIBUSERO PRIMARY KEY(bibusero_passport)
 );
 
+drop table routes cascade constraints;
+CREATE TABLE routes(
+    route_id CHAR (5) NOT NULL,
+    route_stop_time CHAR(10) NOT NULL,
+    route_municipality CHAR(50) NOT NULL,
+    CONSTRAINT PK_ROUTES PRIMARY KEY(route_id),
+    CONSTRAINT FK_REFERENCES_ROUTES_MUNICIPALITY FOREIGN KEY(route_municipality) REFERENCES MUNICIPALITY(municipality_name)
+);
+
