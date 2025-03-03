@@ -135,12 +135,19 @@ CREATE TABLE bibusero(
     CONSTRAINT PK_BIBUSERO PRIMARY KEY(bibusero_passport)
 );
 
+drop table ID_ROUTES cascade constraints;
+CREATE TABLE ID_ROUTES(
+    route_id CHAR(5) NOT NULL,
+    CONSTRAINT PK_ID_ROUTES PRIMARY KEY(route_id)
+);
+
 drop table routes cascade constraints;
 CREATE TABLE routes(
     route_id CHAR (5) NOT NULL,
     route_stop_time CHAR(10) NOT NULL,
     route_municipality CHAR(50) NOT NULL,
     CONSTRAINT PK_ROUTES PRIMARY KEY(route_id,route_stop_time),
+    CONSTRAINT FK_REFERENCES_ROUTES_ROUTE_ID FOREIGN KEY(route_id) REFERENCES ID_ROUTES(route_id),
     CONSTRAINT FK_REFERENCES_ROUTES_MUNICIPALITY FOREIGN KEY(route_municipality) REFERENCES MUNICIPALITY(municipality_name)
 );
 
@@ -185,7 +192,7 @@ CREATE TABLE bibusero_state(
     assigned_route_id CHAR(5) NOT NULL,
     CONSTRAINT PK_BIBUSERO_STATE PRIMARY KEY(bibusero_passport, state_date),
     CONSTRAINT FK_REFERENCES_STATE_BIBUSERO FOREIGN KEY(bibusero_passport) REFERENCES BIBUSERO(bibusero_passport),
-    CONSTRAINT FK_REFERENCES_BIBUSERO_STATE_ROUTE FOREIGN KEY(assigned_route_id) REFERENCES ROUTES(route_id),
+    CONSTRAINT FK_REFERENCES_BIBUSERO_STATE_ROUTE FOREIGN KEY(assigned_route_id) REFERENCES ID_ROUTES(route_id),
     CONSTRAINT C_BIBUSERO_STATE CHECK(state IN ('assigned','aviable'))
 );
     
