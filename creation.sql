@@ -122,3 +122,16 @@ CREATE TABLE user_comments(
     CONSTRAINT FK_REFRENCE_COMMENT_USER FOREIGN KEY(comment_user) REFERENCES USERS(user_id),
     CONSTRAINT FK_REFERENCE_COMMENT_ENTRY FOREIGN KEY(comment_entry) REFERENCES BOOK_ENTRIES(entry_signature)
 );
+
+drop table bibusero cascade constraints;
+CREATE TABLE bibusero(
+    bibusero_passport CHAR(20) NOT NULL,
+    bibusero_fullname CHAR(80) NOT NULL,
+    bibusero_phone CHAR(9) NOT NULL,
+    bibusero_birthdate CHAR(10) NOT NULL,
+    bibusero_email CHAR(100) NOT NULL,
+    bibusero_contract_start_date CHAR(10) NOT NULL,
+    bibusero_contract_end_date CHAR(10),
+    CONSTRAINT PK_BIBUSERO PRIMARY KEY(ibusero_passport)
+);
+
