@@ -144,3 +144,24 @@ CREATE TABLE routes(
     CONSTRAINT FK_REFERENCES_ROUTES_MUNICIPALITY FOREIGN KEY(route_municipality) REFERENCES MUNICIPALITY(municipality_name)
 );
 
+drop table bibus cascade constraints;
+CREATE TABLE bibus(
+    bibus_plate CHAR(8) NOT NULL,
+    bibus_last_ITV CHAR(22), 
+    bibus_next_ITV CHAR(22),
+    CONSTRAINT PK_BIBUS PRIMARY KEY(bibus_plate)
+);
+
+drop table SRoutes cascade constraints;
+CREATE TABLE SRoutes(
+    SRoute_date CHAR(22) NOT NULL,
+    SRoute_route_id CHAR(5) NOT NULL,
+    SRoute_route_stop_time CHAR(10) NOT NULL,
+    SRoute_bibus CHAR(8) NOT NULL,
+    SRoute_bibusero CHAr(20) NOT NULL,
+    CONSTRAINT PK_SROUTES PRIMARY KEY(SRoute_date,SRoute_route_id, SRoute_route_stop_time, SRoute_bibus, SRoute_bibusero),
+    CONSTRAINT FK_REFERENCES_SROUTES_ROUTE FOREIGN KEY(SRoute_route_id, SRoute_route_stop_time) REFERENCES ROUTES(route_id, route_stop_time),
+    CONSTRAINT FK_REFERENCES_SROUTES_BIBUS FOREIGN KEY(SRoute_bibus) REFERENCES BIBUS(bibus_plate),
+    CONSTRAINT FK_REFERNCES_SROUTS_BIBUSERO FOREIGN KEY(SRoute_bibusro) REFERENCES BIBUSERO(bibusero_passport)
+);
+
