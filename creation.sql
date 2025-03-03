@@ -177,7 +177,7 @@ drop table bibus_state cascade constraints;
 CREATE TABLE bibus_state(
     bibus_plate CHAR(8) NOT NULL,
     state_date CHAR(22) NOT NULL,
-    state CHAR(20) NOT NULL DEFAULT('aviable'),
+    state CHAR(20)  DEFAULT('aviable'),
     assigned_route_id CHAR(5) NOT NULL,
     CONSTRAINT PK_BIBUS_STATE PRIMARY KEY(bibus_plate, state_date),
     CONSTRAINT FK_REFERENCES_STATE_BIBUS FOREIGN KEY(bibus_plate) REFERENCES BIBUS(bibus_plate),
