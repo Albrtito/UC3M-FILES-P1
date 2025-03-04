@@ -175,6 +175,7 @@ INSERT INTO m_library (
     library_address,
     library_email,
     library_telephone
+)
 SELECT
     'DEFAULT',
     'DEFAULT',
