@@ -11,7 +11,7 @@ INSERT INTO books (
     book_author_mention,
     book_other_authors
 )
-SELECT 
+SELECT DISTINCT
     TITLE,
     MAIN_AUTHOR,
     PUB_COUNTRY,
