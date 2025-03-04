@@ -33,8 +33,9 @@ CREATE TABLE book_editions(
     edition_URL CHAR(200) NOT NULL,
     edition_book_title CHAR(200) NOT NULL,
     edition_book_main_author CHAR(100) NOT NULL,
+    edition_book_publication_country CHAR(50) NOT NULL,
     CONSTRAINT PK_BOOK_EDITIONS PRIMARY KEY (edition_national_identifier),
-    CONSTRAINT FK_REFERENCEBOOK FOREIGN KEY(edition_book_title, edition_book_main_author) REFERENCES BOOKS(book_title,book_main_author)
+    CONSTRAINT FK_REFERENCEBOOK FOREIGN KEY(edition_book_title, edition_book_main_author,edition_book_publication_country) REFERENCES BOOKS(book_title,book_main_author,book_publication_country)
 );
 
 
@@ -65,7 +66,7 @@ CREATE TABLE municipality(
 );
     
 
-        
+       
 drop table users cascade constraints;
 CREATE TABLE users(
     user_id CHAR(10) NOT NULL,

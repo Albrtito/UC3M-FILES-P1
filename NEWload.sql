@@ -1,6 +1,3 @@
---Statement used during development to execute the table creation script
--- and then get clean tables from the beginning
-@C:\Users\aulavirtual\UC3M-FILES-P1\NEWcreation.sql
 INSERT INTO books (
     book_title,
     book_main_author,
