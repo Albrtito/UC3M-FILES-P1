@@ -43,6 +43,7 @@ WHERE
     AND (MENTION_AUTHORS IS NULL OR LENGTH(MENTION_AUTHORS) <= 200)
     AND (OTHER_AUTHORS IS NULL OR LENGTH(OTHER_AUTHORS) <= 200);
 
+
 INSERT INTO book_editions (
     edition_national_identifier,
     edition_ISBN,
@@ -166,7 +167,23 @@ WHERE
 
 -- THE LIBRARY INSERT WOULD GO HERE BUT THRE IS 
 -- NOT ENOUGH DATA FOR IT. 
-
+INSERT INTO m_library (
+    library_CIF,
+    library_name,
+    library_foundation_date,
+    library_municipality,
+    library_address,
+    library_email,
+    library_telephone
+SELECT
+    'DEFAULT',
+    'DEFAULT',
+    'DEFAULT',
+    'DEFAULT',
+    'DEFAULT',
+    'DEFAULT',
+    'DEFAULT',
+;
 
 INSERT INTO book_loans (
     loan_initial_date,
@@ -179,7 +196,7 @@ SELECT
     DATE_TIME,          
     SIGNATURE,           
     USER_ID,              
-    NULL,                  
+    'DEFAULT',                 
     RETURN                  
 FROM fsdb.loans
 WHERE 
@@ -207,6 +224,12 @@ WHERE
     AND SIGNATURE IS NOT NULL
     AND USER_ID IS NOT NULL;
 
+-- CREATE A SEQUENCE FOR IDs
+CREATE SEQUENCE comment_id_seq
+    START WITH 1         
+    INCREMENT BY 1      
+    NOCACHE            
+    NOCYCLE;          
 
 INSERT INTO user_comments (
     comment_id,
@@ -217,10 +240,10 @@ INSERT INTO user_comments (
     comment_likes,
     comment_dislikes
 )
-SELECT 
-    USER_ID || '_' || SIGNATURE || '_' || POST_DATE, -
-    POST,                                           -
-    USER_ID,                                   
+SELECT
+    comment_id_seq.NEXTVAL,
+    POST,
+    USER_ID,
     SIGNATURE,                                  
     POST_DATE,                                   
     LIKES,                                        
