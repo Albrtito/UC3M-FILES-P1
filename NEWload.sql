@@ -64,8 +64,8 @@ INSERT INTO book_editions (
 SELECT DISTINCT
     NATIONAL_LIB_ID,               
     ISBN,      
-    MAIN_LANGUAG
-    OTHER_LANGUAG
+    MAIN_LANGUAGE,
+    OTHER_LANGUAGES,
     EDITION,      
     PUBLISHER,      
     DIMENSIONS,    
@@ -329,6 +329,7 @@ WHERE
     PLATE IS NOT NULL
     AND STOPDATE IS NOT NULL
     AND ROUTE_ID IS NOT NULL;
+
 
 
 INSERT INTO bibusero_state (
