@@ -78,7 +78,7 @@ SELECT DISTINCT
     URL,                      
     TITLE,                   
     MAIN_AUTHOR             
-FROM original_table_name
+FROM fsdb.acervus
 WHERE 
     NATIONAL_LIB_ID IS NOT NULL
     AND ISBN IS NOT NULL
@@ -109,7 +109,7 @@ SELECT DISTINCT
     NOTES,                        
     'free',                        
     NULL                           
-FROM original_table_name
+FROM fsdb.acervus
 WHERE 
     SIGNATURE IS NOT NULL
     AND NATIONAL_LIB_ID IS NOT NULL;
