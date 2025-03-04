@@ -84,15 +84,10 @@ CREATE TABLE users(
 );
 
 
-drop table book_loans cascade constraints;
-CREATE TABLE book_loans(
-    loan_initial_date CHAR(22) NOT NULL,
-    loan_entry CHAR(20) NOT NULL,
-    loan_user CHAR(10) NOT NULL,
-    loan_final_date CHAR(22),
-    CONSTRAINT PK_BOOK_LOANS PRIMARY KEY(loan_initial_date,loan_entry,loan_user),
-    CONSTRAINT FK_REFERENCE_ENTRY FOREIGN KEY(loan_entry) REFERENCES BOOK_ENTRIES(entry_signature),
-    CONSTRAINT FK_REFERENCE_USER FOREIGN KEY(loan_user) REFERENCES USERS(user_id)
+drop table ID_ROUTES cascade constraints;
+CREATE TABLE ID_ROUTES(
+    route_id CHAR(5) NOT NULL,
+    CONSTRAINT PK_ID_ROUTES PRIMARY KEY(route_id)
 );
 
 
@@ -108,6 +103,42 @@ CREATE TABLE m_library(
     CONSTRAINT PK_M_LIBRARY PRIMARY KEY(library_CIF),
     CONSTRAINT FK_REFERENCE_LIBRARY_MUNICIPALITY FOREIGN KEY(library_municipality) REFERENCES MUNICIPALITY(municipality_name)
 );
+
+drop table book_loans cascade constraints;
+CREATE TABLE book_loans(
+    loan_initial_date CHAR(22) NOT NULL,
+    loan_entry CHAR(20) NOT NULL,
+    loan_user CHAR(10),
+    loan_library CHAR(20),
+    loan_final_date CHAR(22),
+    CONSTRAINT PK_BOOK_LOANS PRIMARY KEY(loan_initial_date,loan_entry,loan_user,loan_library),
+    CONSTRAINT chk_loan_one_null CHECK (
+        (loan_user IS NOT NULL AND loan_library IS NULL) OR 
+        (loan_user IS NULL AND loan_library IS NOT NULL)
+    ),
+    CONSTRAINT FK_REFERENCE_ENTRY FOREIGN KEY(loan_entry) REFERENCES BOOK_ENTRIES(entry_signature),
+    CONSTRAINT FK_REFERENCE_LIBRARY FOREIGN KEY(loan_library) REFERENCES m_library(library_CIF),
+    CONSTRAINT FK_REFERENCE_USER FOREIGN KEY(loan_user) REFERENCES USERS(user_id)
+);
+
+drop table book_reservations cascade constraints;
+CREATE TABLE book_reservations(
+    reservation_date CHAR(22) NOT NULL,
+    reservation_entry CHAR(22) NOT NULL,
+    reservation_user CHAR(10),
+    reservation_library CHAR(20),
+    reservation_route CHAR(5),
+    CONSTRAINT PK_BOOK_RESERVATIONS PRIMARY KEY(reservation_date, reservation_entry),
+    CONSTRAINT FK_REFERENCE_LOAN_USER FOREIGN KEY(reservation_user) REFERENCES USERS(user_id),
+    CONSTRAINT FK_REFERENCE_LOAN_LIBARY FOREIGN KEY(reservation_library) REFERENCES m_library(library_CIF),
+    CONSTRAINT FK_REFERENCE_LOAN_ROUTE FOREIGN KEY(reservation_route) REFERENCES ID_ROUTES(route_id),
+    CONSTRAINT CHECK_RESERVATIONS_ONE_NULL CHECK (
+        (reservation_user IS NOT NULL AND reservation_library IS NULL) OR 
+        (reservation_user IS NULL AND reservation_library IS NOT NULL)
+    )
+);
+
+
 
 drop table user_comments cascade constraints;
 CREATE TABLE user_comments(
@@ -133,12 +164,6 @@ CREATE TABLE bibusero(
     bibusero_contract_start_date CHAR(10) NOT NULL,
     bibusero_contract_end_date CHAR(10),
     CONSTRAINT PK_BIBUSERO PRIMARY KEY(bibusero_passport)
-);
-
-drop table ID_ROUTES cascade constraints;
-CREATE TABLE ID_ROUTES(
-    route_id CHAR(5) NOT NULL,
-    CONSTRAINT PK_ID_ROUTES PRIMARY KEY(route_id)
 );
 
 drop table routes cascade constraints;
@@ -177,7 +202,7 @@ drop table bibus_state cascade constraints;
 CREATE TABLE bibus_state(
     bibus_plate CHAR(8) NOT NULL,
     state_date CHAR(22) NOT NULL,
-    state CHAR(20)  DEFAULT('aviable'),
+    state CHAR(20) DEFAULT('aviable'),
     assigned_route_id CHAR(5) NOT NULL,
     CONSTRAINT PK_BIBUS_STATE PRIMARY KEY(bibus_plate, state_date),
     CONSTRAINT FK_REFERENCES_STATE_BIBUS FOREIGN KEY(bibus_plate) REFERENCES BIBUS(bibus_plate),
