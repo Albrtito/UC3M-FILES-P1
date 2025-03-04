@@ -11,7 +11,7 @@ CREATE TABLE books(
     book_awards CHAR(200),
     book_author_mention CHAR(200),
     book_other_authors CHAR(200),
-    CONSTRAINT PK_BOOKS PRIMARY KEY (book_title,book_main_author)
+    CONSTRAINT PK_BOOKS PRIMARY KEY (book_title,book_main_author, book_publication_country)
 );
 
 
