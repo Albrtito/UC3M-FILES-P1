@@ -23,4 +23,4 @@ SELECT
     AWARDS,
     MENTION_AUTHORS,
     OTHER_AUTHORS
-FROM original_table_name;
+FROM fsdb.acervus;
